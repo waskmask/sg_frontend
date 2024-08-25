@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('partials/head') %>
+    <!-- Add this to your <head> or before the closing </body> tag -->
+    <!-- <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+    /> -->
+  </head>
+  <body class="app">
+    <main>
+      <section class="auth">
+        <div class="grid">
+          <div class="col form-col">
+            <img src="/public/images/logo.svg" alt="logo" class="logo" />
+
+            <div class="title">Register Now!</div>
+            <div class="sub">Secure now your one month free membership.</div>
+
+            <form id="authRegister" novalidate autocomplete="off">
+              <div class="form-alert success d-none mb-3" id="successMsg">
+                Congratulations! 🎉<br /><br />
+                You have successfully registered for the Sugar List prelaunch.
+                An email with a confirmation code will be sent to you shortly.
+                After we officially launch the platform, you can use that code
+                to verify your email address. Once verified, you’ll be able to
+                log in using the same credentials you registered with. We’re
+                excited to have you on board!
+                <a href="/" class="t-light">Visit home</a>
+              </div>
+              <div class="mb-3">
+                <input
+                  class="form-input"
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                />
+              </div>
+
+              <div class="mb-3" id="passContainer">
+                <input
+                  class="form-input"
+                  type="password"
+                  name="password"
+                  id="password"
+                  placeholder="Password"
+                />
+                <div class="viewPass" id="viewPass">
+                  <img
+                    src="/public/images/eye.svg"
+                    id="toggleImage"
+                    alt="eye"
+                  />
+                </div>
+              </div>
+
+              <div class="grid-2">
+                <div>
+                  <div class="custom-select" id="gen">
+                    <div class="select-value">Gender *</div>
+                    <div class="select-dropdown">
+                      <div class="select-option" data-value="male">Male</div>
+                      <div class="select-option" data-value="female">
+                        Female
+                      </div>
+                    </div>
+                  </div>
+                  <input
+                    class="form-input"
+                    type="hidden"
+                    id="Gender"
+                    name="Gender"
+                    required
+                    data-validation="You must specify a Gender"
+                  />
+                </div>
+                <div>
+                  <input
+                    class="form-input"
+                    type="text"
+                    name="Birthday"
+                    id="dob"
+                    required
+                    placeholder="Date of Birth"
+                    data-validation="You must specify Date of Birth"
+                  />
+                </div>
+                <div>
+                  <input
+                    class="form-input"
+                    type="text"
+                    name="city"
+                    placeholder="City"
+                    id="city-input"
+                  />
+                </div>
+                <div>
+                  <input
+                    class="form-input"
+                    type="text"
+                    name="country"
+                    readonly
+                    placeholder="Country"
+                    id="country-input"
+                  />
+                </div>
+
+                <div class="mb-3">
+                  <div class="custom-select" id="searching-for">
+                    <div class="select-value">Searching for *</div>
+                    <div class="select-dropdown">
+                      <div class="select-option" data-value="sugar_baby">
+                        Sugar baby
+                      </div>
+                      <div class="select-option" data-value="sugar_daddy">
+                        Sugar daddy
+                      </div>
+                      <div class="select-option" data-value="sugar_boy">
+                        Sugar boy
+                      </div>
+                      <div class="select-option" data-value="sugar_mommy">
+                        Sugar mommy
+                      </div>
+                    </div>
+                  </div>
+                  <input
+                    class="form-input"
+                    type="hidden"
+                    id="searching_for"
+                    name="searching_for"
+                    required
+                    data-validation="You must specify what are you Searching for"
+                  />
+                </div>
+
+                <div class="mb-3">
+                  <div class="custom-select" id="found-how">
+                    <div class="select-value">How did you hear about us?</div>
+                    <div class="select-dropdown">
+                      <div class="select-option" data-value="instagram">
+                        Instagram
+                      </div>
+                      <div class="select-option" data-value="youtube">
+                        Youtube
+                      </div>
+                      <div class="select-option" data-value="tiktok">
+                        TikTok
+                      </div>
+                      <div class="select-option" data-value="google">
+                        Google search
+                      </div>
+                      <div class="select-option" data-value="tv">
+                        Television
+                      </div>
+                      <div class="select-option" data-value="friend">
+                        Friend
+                      </div>
+                    </div>
+                  </div>
+                  <input
+                    class="form-input"
+                    type="hidden"
+                    id="found_how"
+                    name="found_how"
+                    required
+                    data-validation="Please specify how did you found us"
+                  />
+                </div>
+              </div>
+
+              <div><button class="btn btn-primary">Register</button></div>
+            </form>
+
+            <div class="auth-footer mt-4">
+              By registering on our platform will implies your consent to our
+              <a href="">Terms and Conditions</a> and your acknowledgment of our
+              <a href="">Privacy Policy</a>.
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- javascript -->
+    <%- include('partials/js') %>
+    <script src="/public/js/custom-select.js?v=1.0"></script>
+    <script src="/public/plugins/datedropper-javascript.js?v=1.0"></script>
+    <script src="/public/plugins/axios.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script> -->
+    <script>
+      setupCustomSelect("gen", "Gender");
+      setupCustomSelect("searching-for", "searching_for");
+      setupCustomSelect("found-how", "found_how");
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const today = new Date(); // Get today's date
+        let maxDate = new Date(today); // Create a copy of today's date
+
+        maxDate.setFullYear(today.getFullYear() - 18); // Subtract 18 years from today
+
+        const maxDateStr = `${maxDate.getFullYear()}/${
+          maxDate.getMonth() + 1
+        }/${maxDate.getDate()}`;
+
+        new dateDropper({
+          selector: ".testing-input",
+          expandable: true,
+
+          selector: "#dob",
+          format: "y-mm-dd",
+          maxDate: maxDateStr,
+          defaultDate: maxDateStr,
+        });
+
+        const passContainer = document.getElementById("passContainer");
+        const passwordInput = document.getElementById("password");
+        const viewPass = document.getElementById("viewPass");
+        const toggleImage = document.getElementById("toggleImage");
+
+        // Listen for keydown events
+        passwordInput.addEventListener("keydown", function (event) {
+          if (event.key === " " || event.keyCode === 32) {
+            event.preventDefault();
+          }
+        });
+
+        viewPass.addEventListener("click", function () {
+          // Toggle password visibility
+          if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            toggleImage.src = "/public/images/eye-off.svg";
+          } else {
+            passwordInput.type = "password";
+            toggleImage.src = "/public/images/eye.svg";
+          }
+
+          // Timeout function to revert back to original state after 3 seconds
+          setTimeout(() => {
+            passwordInput.type = "password";
+            toggleImage.src = "/public/images/eye.svg";
+          }, 3000);
+        });
+      });
+    </script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("authRegister");
+
+        form.addEventListener("submit", async function (event) {
+          event.preventDefault(); // Prevent default form submission
+
+          // Remove existing error messages
+          const existingErrors = document.querySelectorAll(".form-alert.error");
+          existingErrors.forEach((el) => el.remove());
+
+          // Collect form data
+          const email = form.elements["email"].value;
+          const password = form.elements["password"].value;
+          const dob = form.elements["Birthday"].value;
+          const gender = form.elements["Gender"].value;
+          const city = form.elements["city"].value;
+          const country = form.elements["country"].value;
+          const searching_for = form.elements["searching_for"].value;
+          const found_at = form.elements["found_how"].value;
+
+          // Validate email
+          const emailRegex = /.+@.+\..+/;
+          if (!emailRegex.test(email)) {
+            displayError("Please enter a valid email address.", "email");
+            return;
+          }
+
+          // Validate password for spaces and length
+          if (/\s/.test(password)) {
+            displayError("Password should not contain spaces.", "password");
+            return;
+          }
+          if (password.length < 6) {
+            displayError(
+              "Password must be at least 6 characters long.",
+              "password"
+            );
+            return;
+          }
+
+          // Validate dob (Date of Birth)
+          if (!dob) {
+            displayError("Date of Birth is required.", "Birthday");
+            hasError = true;
+          }
+
+          // Validate gender
+          if (!gender) {
+            displayError("Gender is required.", "Gender");
+            hasError = true;
+          }
+
+          // Validate city
+          if (!city) {
+            displayError("City is required.", "city");
+            hasError = true;
+          }
+
+          // Validate country
+          if (!country) {
+            displayError("Country is required.", "country");
+            hasError = true;
+          }
+
+          // Validate searching_for
+          if (!searching_for) {
+            displayError(
+              "You must specify what you are searching for.",
+              "searching_for"
+            );
+            hasError = true;
+          }
+          // Validate found_at (How did you hear about us?)
+          if (!found_at) {
+            displayError("Please specify how you found us.", "found_how");
+            hasError = true;
+          }
+
+          // Create an object to hold form data
+          const formData = {
+            email: email,
+            password: password,
+            dob: dob,
+            gender: gender,
+            city: city,
+            country: country,
+            searching_for: searching_for,
+            found_at: found_at,
+            prelaunch: true,
+          };
+
+          try {
+            const response = await axios.post(
+              "http://localhost:3000/users/register",
+              formData,
+              {
+                headers: {
+                  "Content-Type": "application/json",
+                },
+              }
+            );
+
+            console.log("Response:", response); // Log the response to verify success
+            const successAlert = document.querySelector("#successMsg");
+            if (response.status === 201) {
+              // Ensure that the response status is as expected
+              successAlert.classList.remove("d-none");
+
+              // Reset form
+              form.reset();
+            } else {
+              console.error("Unexpected response status:", response.status);
+            }
+          } catch (error) {
+            console.log("Error response:", error.response);
+            if (error.response && error.response.status === 409) {
+              displayError("A user with this email already exists.", "email");
+            } else if (error.response && error.response.data) {
+              displayError(error.response.data.error);
+            } else {
+              console.error("An error occurred:", error);
+            }
+          }
+        });
+
+        // Function to display error message
+        function displayError(message, field) {
+          const errorDiv = document.createElement("div");
+          errorDiv.className = "form-alert error";
+          errorDiv.innerText = message;
+
+          const inputField = document.querySelector(`input[name="${field}"]`);
+          if (inputField) {
+            inputField.parentNode.appendChild(errorDiv);
+          }
+        }
+      });
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4ijUxSISsbNS29gjv8onur04fqQ8zets&libraries=places"></script>
+    <script>
+      var autocomplete = new google.maps.places.Autocomplete(
+        document.getElementById("city-input")
+      );
+
+      autocomplete.setOptions({
+        types: ["(cities)"],
+        disableHistory: true,
+      });
+
+      autocomplete.addListener("place_changed", function () {
+        var place = autocomplete.getPlace();
+        var country = "";
+        var city = "";
+
+        for (var i = 0; i < place.address_components.length; i++) {
+          var addressType = place.address_components[i].types[0];
+
+          if (addressType === "country") {
+            country = place.address_components[i].long_name;
+          } else if (addressType === "locality") {
+            city = place.address_components[i].long_name; // Prioritize locality
+          } else if (addressType === "administrative_area_level_4" && !city) {
+            city = place.address_components[i].long_name; // Fallback if locality is not set
+          }
+        }
+
+        if (country && city) {
+          document.getElementById("country-input").value = country;
+          document.getElementById("city-input").value = city;
+        }
+      });
+    </script>
+
+    <!-- javascript end -->
+  </body>
+</html>

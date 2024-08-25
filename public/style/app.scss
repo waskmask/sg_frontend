@@ -1,0 +1,1437 @@
+@import "./var";
+
+.app-wrapper {
+  display: flex;
+
+  .app-overlay {
+    position: fixed;
+    z-index: 99;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+  }
+  .sidebar {
+    background-color: #fff;
+    width: 250px !important;
+    height: 100vh;
+    border-right: 1px solid #ddd;
+    transition: all 0.3s ease-in-out;
+    z-index: 100;
+    position: sticky;
+    top: 0;
+    @include tablet {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 300px;
+      transform: translateX(-100%);
+    }
+    .header {
+      padding: 2rem 1.5rem;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      #closeSidebar {
+        font-size: 2rem;
+        margin-right: 1.5rem;
+        display: none;
+
+        @include tablet {
+          display: block;
+        }
+      }
+    }
+
+    .logo img {
+      height: 30px;
+    }
+
+    .menu {
+      padding: 0 1.5rem 2rem;
+      max-height: calc(100vh - 100px);
+      overflow: hidden;
+      overflow-y: auto;
+      ul {
+        list-style: none;
+
+        li {
+          font-weight: 300;
+          margin-bottom: 2rem;
+          font-size: 1.1rem;
+          font-family: $dms;
+        }
+
+        a {
+          text-decoration: none;
+          color: $dark;
+          display: flex;
+          align-items: center;
+          span {
+            color: $dark;
+            font-size: 26px;
+            margin-right: 1rem;
+          }
+        }
+        a.active {
+          color: $pdark;
+
+          span {
+            color: $pdark;
+          }
+        }
+      }
+    }
+  }
+  .sidebar.active {
+    transform: translateX(0);
+  }
+
+  .page {
+    width: calc(100% - 250px);
+    @include tablet {
+      width: 100%;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 70px;
+      border-bottom: solid 1px #ddd;
+      background-color: #fff;
+      padding: 0 1.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 98;
+      @include tablet {
+        padding: 0 1rem;
+      }
+
+      .page-title {
+        font-size: 1.1rem;
+        font-weight: 300;
+        color: $dark;
+        font-family: $dms;
+        display: flex;
+        align-items: center;
+
+        span {
+          color: $dark;
+          font-size: 30px;
+          display: none;
+        }
+        .mobile-logo {
+          height: 40px;
+          width: 40px;
+          margin: 0 1.5rem;
+          display: none;
+        }
+
+        @include tablet {
+          .title {
+            display: none;
+          }
+          span,
+          .mobile-logo {
+            display: block;
+          }
+        }
+      }
+    }
+
+    .right {
+      display: flex;
+      align-items: center;
+      .messages {
+        margin-right: 2rem;
+        position: relative;
+        cursor: pointer;
+        span {
+          color: $body-color;
+          font-size: 1.7rem;
+        }
+        div {
+          position: absolute;
+          top: 0;
+          right: -0.5rem;
+          background-color: $pdark;
+          width: 1.2rem;
+          height: 1.2rem;
+          border-radius: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 0.7rem;
+          font-weight: 400;
+          color: #fff;
+        }
+      }
+    }
+    .profile-dd {
+      position: relative;
+      .profile-dd-item {
+        cursor: pointer !important;
+        img {
+          height: 40px;
+          width: 40px;
+          object-fit: cover;
+          border-radius: 20px;
+          border: solid 1px #ddd;
+        }
+      }
+
+      .profile-dropdown {
+        position: absolute;
+        top: 70px;
+        right: 0;
+        width: 250px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        background-color: #fff;
+        border: solid 1px #eee;
+        padding: 2rem 1rem 1.5rem;
+        border-radius: 0.25rem;
+        box-shadow: 1px 3px 10px rgba(51, 51, 51, 0.239);
+        transition: top 0.3s ease-in-out;
+        opacity: 0;
+        pointer-events: none;
+        z-index: 100;
+        img {
+          width: 120px;
+          height: 120px;
+          object-fit: cover;
+          border-radius: 60px;
+        }
+
+        .name {
+          display: flex;
+          align-items: center;
+          counter-reset: $dark;
+          font-size: 0.875rem;
+          font-weight: 500;
+          margin-top: 1rem;
+          text-transform: capitalize;
+          img {
+            width: 1.1rem;
+            height: 1.1rem;
+            margin-left: 0.25rem;
+          }
+        }
+        .premium {
+          font-size: 0.75rem;
+          color: $pdark;
+        }
+
+        .link {
+          margin-top: 1.5rem;
+          border-top: solid 1px #ddd;
+          width: 100%;
+          padding-top: 1.2em;
+
+          a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            font-weight: 300;
+            font-family: $dms;
+            text-decoration: none;
+            color: $dark;
+            transition: all 0.1s ease-in-out;
+            &:hover {
+              color: $pdark;
+            }
+          }
+          span {
+            margin-right: 1rem;
+          }
+        }
+      }
+
+      .profile-dropdown.active {
+        top: 50px;
+        opacity: 1;
+        pointer-events: all;
+      }
+    }
+  }
+
+  .info-links {
+    font-size: 0.85rem;
+    margin-top: 2.5rem;
+    color: $body-color;
+
+    a {
+      color: $body-color;
+    }
+  }
+
+  .page {
+    padding-bottom: 60px;
+    .body {
+      width: 100%;
+      max-width: 752px;
+      display: flex;
+      flex-direction: column;
+      margin: 0 auto;
+      padding: 2rem 0;
+      min-height: calc(100vh - 130px);
+
+      @include medium {
+        padding: 2rem 1.1rem;
+      }
+    }
+
+    .tabs {
+      display: flex;
+      //   justify-content: center;
+      color: $dark;
+      font-weight: 500;
+      font-size: 0.875rem;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      .tab-link {
+        background-color: #ebebeb;
+        padding: 0.5rem 0.75rem;
+        border-radius: 0.25rem;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+        &:hover {
+          background-color: #e8e8e8;
+        }
+      }
+      .tab-link.active {
+        background-color: $pdark;
+        color: #fff;
+      }
+    }
+    .tab-content {
+      display: none;
+    }
+    .tab-content.active {
+      display: block;
+    }
+    .title {
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+    .file-uploader {
+      width: 100%;
+      max-width: 300px;
+      border: dashed 2px #cbcbcb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100px;
+      border-radius: 0.5rem;
+      color: #cbcbcb;
+      font-size: 0.875rem;
+      font-weight: 500;
+      padding: 0 1rem;
+      cursor: pointer;
+      margin-top: 0.5rem;
+      @include phone {
+        min-width: 100%;
+      }
+      .label {
+        display: flex;
+        align-items: center;
+
+        .primary {
+          margin-right: 0.35rem;
+        }
+        .material-symbols-rounded {
+          margin-top: -2px;
+          margin-right: 0.5rem;
+          color: $pdark;
+        }
+      }
+      input {
+        display: none;
+      }
+    }
+
+    .uploaded-images {
+      margin-top: 2.5rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 1rem;
+      @include phone {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .image-item {
+        position: relative;
+        cursor: grab;
+        img {
+          width: 100%;
+          object-fit: cover;
+          border-radius: 0.5rem;
+        }
+
+        .btn {
+          width: 25px;
+          height: 25px;
+          background-color: $pdark;
+          border-color: $pdark !important;
+          border-radius: 1rem;
+          padding: 0;
+          position: absolute;
+          top: 8px;
+          left: 7px;
+          span {
+            font-size: 1rem;
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+}
+
+.my-profile-info {
+  .title {
+    background-color: #efeeee;
+    padding: 0.5rem 0.75rem;
+  }
+  .dwrapper {
+    .label.name {
+      font-size: 1.5rem;
+      text-transform: capitalize;
+      //   font-weight: 600;
+      letter-spacing: -0.5px;
+      .age {
+        font-size: 1.5rem;
+      }
+
+      @include phone {
+        font-size: 1.1rem;
+        .age {
+          font-size: 1.2rem;
+        }
+      }
+    }
+    .label {
+      font-size: 1.1rem;
+      font-weight: 700;
+      font-family: $dms;
+      color: $dark;
+      display: flex;
+      align-items: center;
+
+      small {
+        color: $body-color;
+      }
+      img {
+        width: 1.3rem;
+        height: 1.3rem;
+        margin-left: 0.25rem;
+        @include phone {
+          width: 1.1rem;
+          height: 1.1rem;
+        }
+      }
+      .age {
+        font-size: 1.2rem;
+        margin-left: 0.25rem;
+      }
+    }
+    .text,
+    p {
+      color: darken($body-color, 30%);
+      strong {
+        color: $dark;
+        font-weight: 600;
+      }
+    }
+
+    .text._icon {
+      display: flex;
+      align-items: center;
+      font-weight: 500;
+      color: $dark;
+      text-transform: capitalize;
+      img {
+        width: 15px;
+        margin-right: 0.8rem;
+        margin-left: 0.23rem;
+      }
+      .material-symbols-rounded {
+        margin-right: 0.75rem;
+        color: $dark;
+        font-size: 20px;
+      }
+    }
+  }
+
+  .dwrapper.profile-top {
+    display: flex;
+    min-height: 300px;
+
+    .images {
+      position: relative;
+      width: 300px;
+      margin-right: 1.5rem;
+      margin-top: -50px;
+
+      a {
+        .image {
+          .dp-image {
+            width: 100%;
+            object-fit: cover;
+            border-radius: 0.5rem;
+          }
+        }
+      }
+
+      .plimage {
+        .dp-image {
+          width: 100%;
+          object-fit: cover;
+          border-radius: 0.5rem;
+        }
+      }
+
+      @include phone {
+        width: 100%;
+        margin-bottom: 1.5rem;
+      }
+    }
+    a {
+      text-decoration: none;
+    }
+    .nobg.statusW {
+      background: transparent !important;
+    }
+    .statusW {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      background: linear-gradient(
+        to bottom,
+        #000000b0,
+        rgba(255, 255, 255, 0.009)
+      );
+      position: relative;
+      top: 50px;
+      height: 50px;
+      border-radius: 0.5rem 0.5rem 0 0;
+      padding: 1rem 0.75rem 0;
+      z-index: 3;
+
+      .onlineStatus {
+        width: 12px;
+        height: 12px;
+        background-color: #fff;
+        border-radius: 6px;
+        border: #fff 1px solid;
+      }
+      .onlineStatus.online {
+        background-color: rgb(7, 205, 7);
+      }
+      .onlineStatus.offline {
+        background-color: #b3b3b3;
+      }
+      .img-count {
+        display: flex;
+        align-items: center;
+        color: #fff;
+        margin-top: -17px;
+        font-size: 0.875rem;
+        font-weight: 300;
+        cursor: pointer;
+        .material-symbols-rounded {
+          font-size: 1.3rem;
+        }
+      }
+    }
+
+    @include phone {
+      flex-direction: column;
+    }
+  }
+}
+
+.app--form {
+  .form-input {
+    background-color: #fff;
+    border-color: #bdbdbd;
+    border-radius: 0.5rem;
+
+    &:read-only {
+      background-color: #f5f5f5;
+      cursor: not-allowed;
+    }
+  }
+
+  .select-value {
+    background-color: #fff;
+    border-color: #bdbdbd;
+    border-radius: 0.5rem;
+    padding: 9.1px 14.4px;
+    color: $dark;
+  }
+  .grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 1.5rem;
+    @include phone {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+}
+
+.grid-2-tt {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 1.5rem;
+  @include phone {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+.profile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  padding: 1rem 0;
+  position: sticky;
+  z-index: 5;
+  top: 70px;
+  left: 0;
+  margin-bottom: 1.5rem;
+  @include phone {
+    top: 0;
+    padding: 1rem;
+    border-bottom: 1px solid #dedede;
+    margin: 0 -1rem 1.5rem;
+  }
+  .back-btn {
+    cursor: pointer !important;
+    height: 35px;
+    span {
+      font-size: 2.5rem;
+      color: $dark;
+      margin-top: -0.25rem;
+    }
+  }
+  .action {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    .btn.removeFav {
+      color: $pdark;
+    }
+  }
+
+  .btn {
+    display: flex;
+    align-items: center;
+    height: 35px;
+    padding: 0 0.75rem;
+    .himo {
+      margin-right: 0;
+      font-size: 0.875rem;
+    }
+    .material-symbols-rounded {
+      margin-right: 0.5rem;
+      font-size: 1.1rem;
+      margin-top: -1px;
+    }
+
+    @include phone {
+      height: 38px;
+      width: 45px;
+      .material-symbols-rounded {
+        margin-right: 0;
+        font-size: 1.4rem;
+        margin-top: 0;
+      }
+    }
+  }
+}
+
+._pname {
+  text-transform: capitalize;
+  @include medium {
+    max-width: 180px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  @include phone {
+    max-width: 240px;
+  }
+}
+.vbox-child img {
+  max-height: 90vh;
+}
+
+.createdby {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  .label {
+    font-size: 0.875rem !important;
+    font-weight: 300 !important;
+  }
+  .by {
+    font-size: 0.7rem;
+    background-color: $pdark;
+    color: #fff;
+    padding: 0.1rem 0.5rem;
+    border-radius: 0.25rem;
+    text-transform: capitalize;
+  }
+  .by.others {
+    background-color: #3a9bef;
+  }
+}
+
+.explore {
+  .filters {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    // border-bottom: 1px solid #ddd;
+    padding: 0.75rem 0;
+    margin-bottom: 1rem;
+    position: relative;
+    .label {
+      font-size: 0.875rem;
+      font-weight: 400;
+      color: $body-color;
+    }
+
+    .filter .toggle {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      cursor: pointer;
+      font-family: $dms;
+    }
+    .f-header {
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.5rem;
+    }
+    .filter-close {
+      margin-right: 0.5rem;
+      padding: 0.5rem 0.5rem 0.5rem 0;
+      &:hover {
+        color: $pdark;
+      }
+    }
+    .fcount {
+      background-color: #f34b6f;
+      width: 1.2rem;
+      height: 1.2rem;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: #fff;
+    }
+    .btn .fcount {
+      background-color: transparent;
+    }
+    .body {
+      padding: 1rem 1.5rem;
+      max-height: calc(100vh - 50px);
+      overflow: hidden;
+      overflow-y: auto;
+
+      @media screen and (min-width: 991px) {
+        /* For Webkit browsers like Chrome and Safari */
+        &::-webkit-scrollbar {
+          width: 8px; /* Width of the scrollbar */
+        }
+
+        &::-webkit-scrollbar-thumb {
+          background: #888; /* Color of the draggable scrolling element */
+          border-radius: 4px; /* Rounded corners */
+        }
+
+        &::-webkit-scrollbar-thumb:hover {
+          background: #555; /* Color when hovered */
+        }
+
+        /* For Firefox */
+        * {
+          scrollbar-width: thin;
+          scrollbar-color: #888 #fff; /* thumb and track color */
+        }
+      }
+    }
+
+    .title {
+      font-size: 1.1rem;
+    }
+    .options {
+      position: fixed;
+      z-index: 100;
+      background-color: #fff;
+      width: 300px;
+      max-width: 100%;
+      right: 0;
+      top: 0;
+      height: 100vh;
+      transform: translateX(100%);
+      transition: transform 0.3s ease-in;
+    }
+    .options.show {
+      transform: translateX(0);
+    }
+  }
+  .custom-rad {
+    &:nth-last-child(1) {
+      margin-bottom: 3rem;
+    }
+    .value {
+      border: solid 1px #8a8a8a;
+      padding: 0.5rem 0.75rem;
+      border-radius: 0.25rem;
+    }
+
+    .label.selected {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #e7e7e7;
+      width: fit-content;
+      color: $dark;
+      font-size: 1rem;
+      font-weight: 500 !important;
+      padding: 0.2rem 0.5rem;
+      border-radius: 0.25rem;
+      margin-top: 0.25rem;
+      margin-bottom: 0.25rem;
+      .remove-item {
+        margin-left: 0.5rem;
+        font-size: 1rem;
+        font-weight: 300;
+        cursor: pointer;
+        color: $pdark;
+      }
+    }
+    .drop-down {
+      display: none;
+      max-height: 150px;
+      overflow-y: auto;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+
+      .list {
+        margin-top: 0.75rem;
+        &:nth-last-child(1) {
+          margin-bottom: 0.5rem;
+        }
+      }
+    }
+    .drop-down.show {
+      display: block;
+      opacity: 1;
+    }
+  }
+  .profiles {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    @include phone {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.65rem;
+      margin-left: -5px;
+      margin-right: -5px;
+    }
+    .profile {
+      position: relative;
+      height: 100%;
+      cursor: pointer;
+      .onlineStatus {
+        position: absolute;
+        left: 0.75rem;
+        top: 0.75rem;
+        width: 12px;
+        height: 12px;
+
+        border-radius: 6px;
+        border: #fff 1px solid;
+      }
+      .onlineStatus.offline {
+        background-color: #b3b3b3;
+      }
+      .onlineStatus.online {
+        background-color: rgb(7, 205, 7);
+      }
+      .remove-fav,
+      .unblock-user {
+        position: absolute;
+        left: 0.5rem;
+        top: 0.5rem;
+      }
+      img {
+        width: 100%;
+        border-radius: 0.5rem;
+      }
+    }
+  }
+
+  .info-wrapper {
+    position: absolute;
+    bottom: 6px;
+    left: 0;
+    border-radius: 0 0 0.5rem 0.5rem;
+    width: 100%;
+    padding: 3rem 1rem 1rem;
+    color: #fff;
+    background: linear-gradient(to top, rgb(0, 0, 0), rgba(1, 1, 1, 0));
+
+    .createdby {
+      .label {
+        font-size: 0.75rem !important;
+      }
+    }
+    .name {
+      display: flex;
+      align-items: center;
+      font-family: $dms;
+      @include phone {
+        font-size: 1rem !important;
+      }
+      ._pname {
+        max-width: 150px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-right: 0.1rem;
+        text-transform: capitalize;
+        font-weight: 700;
+
+        @include phone {
+          max-width: 150px;
+        }
+      }
+      .age {
+        font-weight: 700;
+        margin-left: 0.15rem;
+      }
+
+      img {
+        width: 20px;
+        height: 20px;
+        object-fit: contain;
+        margin-left: 0.1rem;
+      }
+    }
+    .text {
+      font-size: 0.75rem;
+    }
+  }
+}
+
+.message-wrapper {
+  height: calc(100vh - 102px);
+  margin-top: 1rem;
+  border: solid 1px #ddd;
+  border-radius: 0.5rem;
+  display: flex;
+
+  @include phone {
+    border: none;
+  }
+  .m-list {
+    border-right: 1px solid #ddd;
+    width: 100%;
+    max-width: 300px;
+    height: 100%;
+    @include medium {
+      max-width: 250px;
+    }
+    @include phone {
+      border: none;
+      max-width: 100%;
+    }
+    .m-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      height: 60px;
+      border-bottom: 1px solid #ddd;
+      padding-left: 1rem;
+      @include phone {
+        border: none;
+        padding-left: 0;
+      }
+      .title {
+        font-size: 1.1rem;
+        color: $dark;
+      }
+      .s-icon {
+        margin-right: 0.75rem;
+        margin-top: 0.34rem;
+        color: $dark;
+        cursor: pointer;
+      }
+
+      .search {
+        position: absolute;
+        top: 0;
+        right: 0;
+        display: none;
+      }
+    }
+
+    .m-body {
+      overflow: hidden;
+      overflow-y: auto;
+      max-height: calc(100% - 60px);
+      padding: 0.75rem 0 1rem;
+      .m-item {
+        display: flex;
+        align-items: center;
+        padding: 0.5rem 1rem;
+        margin-bottom: 0.5rem;
+        cursor: pointer;
+        &:hover {
+          background-color: #f0f0f0;
+        }
+        @include phone {
+          padding: 0.5rem 0;
+          &:hover {
+            background-color: #fff;
+          }
+        }
+        .m-user {
+          position: relative;
+          height: 50px;
+          img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+          }
+
+          .newM {
+            position: absolute;
+            right: 0px;
+            bottom: 0px;
+            background-color: $pdark;
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0rem 0.28rem;
+            border-radius: 50%;
+          }
+
+          span {
+            width: 50px;
+            height: 50px;
+            border: solid 2px #ddd;
+            background-color: #eaeaea;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: $body-color;
+            font-size: 1.5rem;
+            display: none;
+          }
+          .onlineStatus {
+            width: 12px;
+            height: 12px;
+            background-color: #b3b3b3;
+            border: solid #fff 1px;
+            border-radius: 5px;
+            position: absolute;
+            top: 0;
+            left: 0;
+          }
+          .onlineStatus.offline {
+            background-color: #b3b3b3;
+          }
+          .onlineStatus.online {
+            background-color: rgb(20, 231, 104);
+          }
+        }
+
+        .content {
+          margin-left: 1rem;
+          position: relative;
+          .name {
+            font-family: $dms;
+            font-size: 1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            ._pname {
+              max-width: 180px;
+              overflow: hidden;
+              white-space: nowrap;
+              text-overflow: ellipsis;
+
+              @include medium {
+                max-width: 135px;
+              }
+              @include phone {
+                font-size: 1.1rem;
+                max-width: 100%;
+              }
+            }
+            img {
+              width: 14px;
+              margin-left: 0.25rem;
+            }
+          }
+          .text {
+            width: 170px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-size: 0.875rem;
+            color: $body-color;
+            margin-top: 0.2rem;
+            @include medium {
+              max-width: 135px;
+            }
+            @include phone {
+              width: 100%;
+              max-width: 260px;
+            }
+          }
+        }
+      }
+      .m-item.active {
+        background-color: #f0f0f0;
+      }
+    }
+  }
+
+  .m-container {
+    width: 100%;
+    position: relative;
+    @include phone {
+      // display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 999999;
+      height: calc(var(--vh, 1vh) * 100);
+    }
+    .msg-not-selected {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      .title {
+        margin: 0.5rem 0;
+      }
+      p {
+        color: $body-color;
+      }
+      img {
+        height: 120px;
+      }
+    }
+    .m-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      height: 60px;
+      background-color: #fff;
+      border-bottom: 1px solid #ddd;
+      padding-left: 1rem;
+      width: 100%;
+      @include phone {
+        position: sticky;
+        top: 0;
+        left: 0;
+        z-index: 999999;
+      }
+      ._user {
+        display: flex;
+        align-items: center;
+      }
+      .name {
+        font-size: 1rem;
+        font-family: $dms;
+        font-weight: 700;
+        line-height: 1.1;
+        display: flex;
+        ._pname {
+          text-transform: capitalize;
+          @include medium {
+            max-width: 180px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+          }
+          @include phone {
+            max-width: 220px;
+          }
+        }
+        img {
+          width: 14px;
+          margin-left: 0.25rem;
+          margin-top: 1px;
+        }
+      }
+      .onlineStatus {
+        font-size: 0.65rem;
+        color: $body-color;
+      }
+      .onlineStatus.online {
+        color: rgb(5, 168, 78);
+      }
+      .onlineStatus.offline {
+        color: #b3b3b3;
+      }
+      .m-user {
+        position: relative;
+        height: 30px;
+        margin-right: 0.65rem;
+        img {
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+
+        span {
+          width: 30px;
+          height: 30px;
+          border: solid 2px #ddd;
+          background-color: #eaeaea;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: $body-color;
+          font-size: 1.2rem;
+          display: none;
+        }
+        .online {
+          width: 10px;
+          height: 10px;
+          background-color: rgb(20, 231, 104);
+          border: solid #fff 1px;
+          border-radius: 5px;
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
+      }
+
+      .action {
+        padding: 5px 16px 5px 10px;
+        position: relative;
+        cursor: pointer;
+        .dot {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background-color: $body-color;
+          margin-bottom: 0.1rem;
+        }
+
+        .acdd {
+          position: absolute;
+          right: 0;
+          z-index: 2;
+          background-color: #fff;
+          width: 170px;
+          border: solid 1px #ddd;
+          padding: 1.3rem 1.3rem 0.3rem;
+          border-radius: 0.5rem;
+          display: none;
+          .btn {
+            border: none !important;
+            padding: 0;
+            height: auto;
+            margin-bottom: 1rem;
+            span {
+              font-size: 1.2rem;
+              margin-right: 0.5rem;
+            }
+          }
+        }
+      }
+    }
+
+    .m-body-holder {
+      height: calc(100% - 110px);
+      background-color: #f2f2f2;
+      position: relative;
+      padding-top: 1rem;
+      padding-bottom: 30px;
+      overflow: hidden;
+      overflow-y: auto;
+      .message {
+        display: flex;
+        align-items: flex-start;
+        font-family: $dms;
+        max-width: calc(100% - 32px);
+        margin-left: 1rem;
+        margin-bottom: 1rem;
+        .user img {
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          object-fit: cover;
+          margin-right: 0.5rem;
+        }
+        .m-text {
+          background-color: #fff;
+          border: solid 1px #e8e8e8;
+          padding: 0.5rem 0.75rem;
+          border-radius: 0.5rem;
+
+          P {
+            color: $dark;
+          }
+          small {
+            line-height: 1;
+            font-size: 0.7rem;
+            float: right;
+            margin-top: 0.25rem;
+            color: $body-color;
+          }
+        }
+      }
+
+      .message.me {
+        .m-text {
+          background-color: #fff0f0;
+          border-color: #fdc7c7;
+        }
+      }
+    }
+    .m-footer {
+      background-color: #f2f2f2;
+      position: absolute;
+      bottom: 0rem;
+      left: 0;
+      width: 100%;
+      padding: 1rem;
+
+      @include phone {
+        position: fixed !important;
+      }
+      .send {
+        position: absolute;
+        right: 1.2rem;
+        bottom: 19px;
+        .btn {
+          height: 38px;
+          width: 50px;
+          border-radius: 5px;
+          font-family: $dms;
+        }
+      }
+    }
+  }
+}
+
+.dwrapper {
+  .title {
+    font-family: $dms;
+  }
+  .sub {
+    color: $body-color;
+  }
+}
+
+@media screen and (min-width: 991px) {
+  .cus-scroll {
+    /* For Webkit browsers like Chrome and Safari */
+    &::-webkit-scrollbar {
+      width: 6px; /* Width of the scrollbar */
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #888; /* Color of the draggable scrolling element */
+      border-radius: 4px; /* Rounded corners */
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: #555; /* Color when hovered */
+    }
+
+    /* For Firefox */
+    * {
+      scrollbar-width: thin;
+      scrollbar-color: #888 #fff; /* thumb and track color */
+    }
+  }
+}
+
+.app .memberships {
+  .active-plan {
+    margin-top: 1rem;
+    .title {
+      font-size: 1.3rem;
+      color: $green;
+    }
+    .plan {
+      font-size: 2rem;
+      font-weight: 700;
+    }
+    .expiry {
+      font-weight: 500;
+      color: $red;
+    }
+  }
+
+  .grid {
+    grid-template-columns: 1fr 1fr;
+
+    @include phone {
+      grid-template-columns: 1fr;
+
+      .card {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.cap {
+  text-transform: capitalize !important;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.danger {
+  color: $red;
+}
+
+.report-header {
+  .user {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+    .avatar {
+      width: 50px;
+      height: 50px;
+      img {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+    }
+  }
+}

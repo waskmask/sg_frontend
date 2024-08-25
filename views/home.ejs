@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('partials/head') %>
+  </head>
+  <body>
+    <%- include('partials/header') %>
+    <main>
+      <section class="intro">
+        <video autoplay loop muted>
+          <source src="/public/images/hero-intro.webm" type="video/webm" />
+          <source src="/public/images/hero-intro.mp4" type="video/mp4" />
+        </video>
+        <div class="text">
+          <div class="subtitle">Coming Soon...</div>
+
+          <div class="title mb-3">Sugar List</div>
+          <div class="desc">Luxury dating and much more!</div>
+          <button class="btn btn-primary" onclick="toRegister()">
+            Join Now
+          </button>
+          <div class="learnMore" onclick="scrollToLearnMore()">Learn more</div>
+        </div>
+        <div class="overlay"></div>
+      </section>
+
+      <section class="how-it-works content" id="learnMore">
+        <div class="layout">
+          <div class="title">Find Someone Special</div>
+          <div class="sub primary">How it Works?</div>
+          <div class="grid">
+            <div class="card">
+              <img src="/public/images/register.svg" alt="register" />
+              <div class="title">Register</div>
+              <div class="desc">
+                Create your profile with just a few details to begin your
+                journey towards finding the perfect match.
+              </div>
+            </div>
+            <div class="card">
+              <img src="/public/images/connect.svg" alt="connect" />
+              <div class="title">Connect</div>
+              <div class="desc">
+                Browse through profiles and connect to those who catch your eye,
+                bringing you one step closer to meeting your ideal match.
+              </div>
+            </div>
+            <div class="card">
+              <img src="/public/images/chat.svg" alt="chat" />
+              <div class="title">Interact</div>
+              <div class="desc">
+                Engage in meaningful chats to discover if there's a true
+                connection, helping you determine if it's the perfect match.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="who-we-are content">
+        <video autoplay loop muted poster="/public/images/Sequence 01_1.png">
+          <source src="/public/images/Sequence 01_1.mp4" type="video/mp4" />
+        </video>
+        <div class="overlay"></div>
+        <div class="layout">
+          <div class="grid">
+            <div class="col">
+              <div class="title">Who We Are?</div>
+              <div class="sub">
+                At Sugarlist, we're more than just a dating platform—we're a
+                community focused on meaningful connections and empowerment. We
+                offer unique features like 1-on-1 video chats to help you build
+                authentic relationships. we will provide opportunities to earn
+                passive income while connecting with like-minded individuals.
+                Additionally, our marketplace will allow users to explore and
+                purchase a range of digital and physical erotic products.
+                Sugarlist is where connection meets opportunity, all in a safe
+                and engaging environment.
+              </div>
+              <button class="btn btn-primary" onclick="toRegister()">
+                Join Now
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="module_title content">
+        <img src="/public/images/module_title.webp" alt="module title image" />
+        <div class="layout">
+          <div class="container">
+            <div class="title t-light">What's inside Sugar List?</div>
+            <div class="desc t-light">Glimpse of the Modules:</div>
+          </div>
+        </div>
+      </section>
+      <section class="module_pl content">
+        <div class="layout">
+          <div class="container">
+            <div class="title t-light">Profile List</div>
+            <div class="desc t-light">
+              At SugarList, we've made it easy for Sugar Daddies and Sugar Babes
+              to find each other and connect. Each user has a profile page that
+              they can customize with their interests, hobbies, and expectations
+              for the arrangement. Using our search and discovery feature, Sugar
+              Daddies and Sugar Babes can filter potential matches based on
+              location, age, gender, interests, and more.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="single_profile_img">
+        <img
+          src="/public/images/singlepro.webp"
+          width="100%"
+          alt="Single profile view"
+        />
+      </section>
+
+      <section class="modules iShop content">
+        <div class="layout">
+          <div class="grid_2">
+            <div class="col">
+              <div class="title">Inbuilt Shop</div>
+              <div class="desc">
+                At SugarList, we've recognized a significant demand for erotic
+                products in the market. As part of our platform, we offer an
+                inbuilt shop where Sugar Babes can sell their private videos,
+                images, and even their worn undergarments, including socks. This
+                feature not only generates a passive income for Sugar Babes but
+                also keeps users engaged on the platform and provides them with
+                everything they need.
+              </div>
+            </div>
+            <div class="col">
+              <img src="/public/images/ishopp.webp" width="100%" alt="Shop" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="modules chat content">
+        <div class="layout">
+          <div class="grid_2">
+            <div class="col">
+              <div class="title">Realtime Chat</div>
+              <div class="desc">
+                SugarList offers a Realtime chat feature that enables Sugar
+                Babes and Sugar Daddies to communicate via text. Within the
+                chat, Sugar Daddies can send virtual gifts, which generates an
+                income for the Sugar Babes. This feature enhances the user
+                experience by providing an interactive and engaging platform for
+                communication while also allowing Sugar Babes to monetize their
+                time spent on the platform.
+              </div>
+            </div>
+            <div class="col">
+              <img src="/public/images/sChat.webp" alt="chat" />
+            </div>
+          </div>
+        </div>
+
+        <div class="layout mt-5">
+          <div class="grid_2 aend">
+            <div class="col">
+              <div class="title">Video 1-2-1</div>
+              <div class="desc">
+                At SugarList, we've created a revolutionary feature that allows
+                Sugar Babes to sell their private live streaming shows and earn
+                coins in exchange. With the ability to set their own cost per
+                minute, this feature has the potential to be a game changer in
+                the industry. Sugar Babes can earn a significant income, even
+                just by streaming online. This feature provide them with a
+                flexible and lucrative way to monetize their content.
+              </div>
+              <img
+                src="/public/images/liveStreamChat.webp"
+                style="width: 100% !important"
+                alt="live chat"
+              />
+            </div>
+            <div class="col">
+              <img
+                src="/public/images/sLiveStrem.webp"
+                class="mb-5"
+                alt="Live stream"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="modules wallet content">
+        <div class="layout">
+          <div class="grid_2">
+            <div class="col">
+              <div class="title">Inbuilt wallet</div>
+              <div class="desc">
+                At SugarList, our inbuilt wallet serves as the central hub for
+                our users to manage their purchased coins, earnings, and
+                monetization income. Our platform currency is coins, which users
+                can exchange fiat for and use to purchase products, send virtual
+                gifts, and buy private live streaming from Sugar Babes.
+                <br />
+                <br />
+                Sugar Babes have complete visibility and control over their
+                income, as they can manage and convert their coins to fiat and
+                withdraw to their bank or PayPal. This feature provides a
+                convenient and secure way for Sugar Babes to access and manage
+                their earnings on the platform.
+              </div>
+            </div>
+            <div class="col">
+              <img
+                src="/public/images/sWallet1.webp"
+                width="100%"
+                alt="Wallet"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="join-banner content">
+        <div class="layout">
+          <div class="col mx-auto">
+            <div class="title t-light">Secure one month free membership!</div>
+            <div class="desc t-light">
+              Register now on our prelaunch phase 1 app and earn a free month of
+              membership when we launch the sugarlist.de
+            </div>
+
+            <button class="btn mx-auto mt-3 btn-primary" onclick="toRegister()">
+              Join Now
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <%- include('partials/footer') %>
+    <!-- javascript -->
+    <%- include('partials/js') %>
+    <script>
+      function scrollToLearnMore() {
+        document.getElementById("learnMore").scrollIntoView({
+          behavior: "smooth",
+        });
+      }
+    </script>
+    <!-- javascript end -->
+  </body>
+</html>

@@ -1,0 +1,28 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,200;9..40,300;9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&family=Inter:wght@300;400;500;600;700&display=swap");
+
+$primary: #ff927b;
+$pdark: #f34b6f;
+$dark: #19202c;
+$red: #ff2600;
+$body-color: #9c9d9e;
+$green: #00ba8f;
+$yellow: #ffc107;
+
+$dms: "DM Sans", sans-serif;
+$inter: "Inter", sans-serif;
+
+@mixin medium {
+  @media screen and (max-width: 992px) {
+    @content;
+  }
+}
+@mixin tablet {
+  @media screen and (max-width: 821px) {
+    @content;
+  }
+}
+@mixin phone {
+  @media screen and (max-width: 576px) {
+    @content;
+  }
+}
