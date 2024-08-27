@@ -169,7 +169,9 @@
                 </div>
               </div>
 
-              <div><button class="btn btn-primary">Register</button></div>
+              <div>
+                <button class="btn btn-primary" id="subMit">Register</button>
+              </div>
             </form>
 
             <div class="auth-footer mt-4">
@@ -323,7 +325,9 @@
             displayError("Please specify how you found us.", "found_how");
             hasError = true;
           }
-
+          const sButton = document.getElementById("subMit");
+          sButton.disabled = true;
+          sButton.innerText = "Registering...";
           // Create an object to hold form data
           const formData = {
             email: email,
@@ -356,10 +360,16 @@
 
               // Reset form
               form.reset();
+              sButton.disabled = false;
+              sButton.innerText = "Register";
             } else {
               console.error("Unexpected response status:", response.status);
+              sButton.disabled = false;
+              sButton.innerText = "Register";
             }
           } catch (error) {
+            sButton.disabled = false;
+            sButton.innerText = "Register";
             console.log("Error response:", error.response);
             if (error.response && error.response.status === 409) {
               displayError("A user with this email already exists.", "email");
